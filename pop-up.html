@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <title>Modal</title>
+
+            <style>
+                *,
+                *::after,
+                *::before {
+                    box-sizing: border-box;
+                }
+
+                .modal {
+                    
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(0);
+                    transition: 200ms ease-in-out;
+                    /*border: 1px solid black;*/
+                    border-radius: 10px;
+                    z-index: 10;
+                    
+                    
+                }
+
+                .modal.active {
+                    background-color:  rgba(131, 62, 62, 0);
+                    transform: translate(-50%, -50%) scale(1);
+                }
+
+                .modal-header {
+                    padding: 0 ;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                   
+                }
+
+
+                .modal-header .close-button {
+                    cursor: pointer;
+                    border: none;
+                    outline: none;
+                    background: none;
+                    font-size: 1.25rem;
+                    font-weight: bold;
+                }
+
+                .modal-body {
+                    padding: 5px 0 0 0;
+                }
+                #modal > div.modal-header > button{
+                    background-color: white;
+                    border-radius: 50%;
+                    
+                }
+
+                #overlay {
+                    position: fixed;
+                    opacity: 0;
+                    transition: 200ms ease-in-out;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: rgba(0, 0, 0, .7);
+                    pointer-events: none;
+                }
+
+                #overlay.active {
+                    opacity: 1;
+                    
+                    pointer-events: all;
+                }
+                @media only screen and (max-width: 450px) {
+        
+                    .modal  {
+                        width: 350px;
+                        height: 350px;
+                    } 
+                }
+                
+            </style>
+
+        </head>
+
+        <body>
+
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium perferendis nam maiores! Labore esse ipsum
+            
+            totam obcaecati velit corporis similique tempora consequuntur aliquam fuga ipsa distinctio placeat, rerum ullam
+            illum! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium perferendis nam maiores! Labore esse
+            
+            totam obcaecati velit corporis similique tempora consequuntur aliquam fuga ipsa distinctio placeat, rerum ullam
+
+            <div class="modal" id="modal">
+                <div class="modal-header">
+                    <div class="title"></div>
+                    <button data-close-button class="close-button">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <center>
+                    <a href="https://aicnalanda.com/" target="_blank"><img src="very small2.jpg" style="width: 100%; height: 100%;"
+                            alt=""></a>
+                        </center>
+                </div>
+            </div>
+
+            <div id="overlay"></div>
+            <script>
+
+                        const openModalButtons = document.querySelectorAll('[data-modal-target]')
+                        const closeModalButtons = document.querySelectorAll('[data-close-button]')
+                        const overlay = document.getElementById('overlay')
+
+
+                        // turn modals on automatically - start
+
+                        const modalId = document.querySelector('#modal');
+                        const overlayId = document.querySelector('#overlay');
+
+
+                        modalId.classList.add('active')
+                        overlayId.classList.add('active')
+
+                        // turn modals on automatically - end
+
+
+                        closeModalButtons.forEach(button => {
+                            button.addEventListener('click', () => {
+                                const modal = button.closest('.modal')
+                                closeModal(modal)
+                            })
+                        })
+
+                        function closeModal(modal) {
+                            if (modal == null) return
+                            modal.classList.remove('active')
+                            overlay.classList.remove('active')
+                        }
+
+                </script>
+        </body>
+
+</html>
